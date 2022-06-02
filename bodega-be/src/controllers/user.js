@@ -2,6 +2,7 @@ const status  = require("http-status-codes").StatusCodes
 
 module.exports = {
     async create(req, res){
+        // 	#swagger.tags = ['Usuário']
         try{
             const { email, name, password } = req.body 
             if (!(email || name || password)){
@@ -21,6 +22,7 @@ module.exports = {
     },
 
     async login(req, res){
+        // 	#swagger.tags = ['Usuário']
         try{
             const { email, password } = req.body 
             // select * from users where login = req.body.login and password=req.body.password;

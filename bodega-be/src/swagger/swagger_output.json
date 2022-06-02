@@ -1,0 +1,347 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Bodega API",
+    "description": "Documentação dos endpoints da Bodega-cc"
+  },
+  "host": "localhost:4000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/product/": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Recupera todos os produtos",
+        "description": "Recupera todos os produtos dispóniveis no banco de dados",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Cria produto",
+        "description": "Insere produtos no bancos de dados",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Json com campos do produto",
+            "required": true,
+            "format": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Régua"
+                },
+                "category": {
+                  "type": "number",
+                  "example": 1
+                },
+                "value": {
+                  "type": "number",
+                  "example": 3.5
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Régua de 20 cm"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 2
+                },
+                "image": {
+                  "type": "string",
+                  "example": "path_to_image_or_url"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto criado com sucesso !"
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      }
+    },
+    "/product/category/{id}": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Recupera produtos por categoria",
+        "description": "Recupera todos os os produtos de uma categoria",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Id da categoria",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso !"
+          }
+        }
+      }
+    },
+    "/product/price/higherThan/{value}": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Recupera produtos com valores superiores ao informado",
+        "description": "Recupera produtos com valores superiores ao informado no corpo da requisição",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Valor",
+            "format": "float"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso !"
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      }
+    },
+    "/product/price/lowerThan/{value}": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Recupera produtos com valores inferiores ao informado",
+        "description": "Recupera produtos com valores inferiores ao informado no corpo da requisição",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Valor",
+            "format": "float"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso !"
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      }
+    },
+    "/product/name/{name}": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Recupera produtos filtrando por nome",
+        "description": "Recupera produtos que possuem nomes parecidos com o nome informado",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nome que será pesquisado",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso !"
+          },
+          "404": {
+            "description": "Nenhum produto encontrado"
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "delete": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Deleta produto",
+        "description": "Deleta produto do banco de dados",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Id do produto",
+            "format": "int64"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/product/updatePrice/{id}": {
+      "put": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Atualiza preço do produto",
+        "description": "Atualiza preço de um produto no banco de dados",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Id do produto",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Json com novo valor",
+            "required": true,
+            "format": "int64",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/product/reserve/{id}": {
+      "put": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Reserva produto",
+        "description": "Reserva um produto no banco de dados",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Id do produto",
+            "format": "int64"
+          },
+          {
+            "name": "quantity",
+            "in": "body",
+            "description": "Quantidade a ser reservada",
+            "required": true,
+            "format": "int64",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "example": 3
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/user/": {
+      "post": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
