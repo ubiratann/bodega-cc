@@ -7,7 +7,34 @@ module.exports = {
             #swagger.tags = ['Produto']
             #swagger.summary = 'Recupera todos os produtos'
             #swagger.description = 'Recupera todos os produtos dispóniveis no banco de dados'
-
+            #swagger.responses[200] = {
+                description: 'Busca realizada com sucesso!',
+                schema : {
+                    array : [
+                        {
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        },{
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        }
+                    ]
+                }
+            }
+            #swagger.responses[404] = {
+                description: 'Nenhum produto encontrado na categoria informada!'
+            }
+            #swagger.response[500]: {
+                description: 'Erro interno no servidor'
+            }
         */
         try{
             products = [] // select * from products;
@@ -33,7 +60,26 @@ module.exports = {
                 format: 'int64',
             }
             #swagger.responses[200] = {
-                description: 'Busca realizada com sucesso!'
+                description: 'Busca realizada com sucesso!',
+                schema : {
+                    array : [
+                        {
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        },{
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        }
+                    ]
+                }
             }
             #swagger.responses[404] = {
                 description: 'Nenhum produto encontrado na categoria informada!'
@@ -66,7 +112,26 @@ module.exports = {
                 format: 'float'
             }
             #swagger.responses[200] = {
-                description: 'Busca realizada com sucesso !'
+                description: 'Busca realizada com sucesso !',
+                schema : {
+                    array : [
+                        {
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        },{
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        }
+                    ]
+                }
             }
             #swagger.responses[404] = {
                 description: 'Nenhum produto encontrado na faixa de preço indicada!'
@@ -98,7 +163,26 @@ module.exports = {
                 format: 'float'
             }
             #swagger.responses[200] = {
-                description: 'Busca realizada com sucesso !'
+                description: 'Busca realizada com sucesso !',
+                schema : {
+                    array : [
+                        {
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        },{
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        }
+                    ]
+                }
             }
             #swagger.responses[404] = {
                 description: 'Nenhum produto encontrado na faixa de preço indicada!'
@@ -131,7 +215,26 @@ module.exports = {
             }
 
             #swagger.responses[200] = {
-                description: 'Busca realizada com sucesso !'
+                description: 'Busca realizada com sucesso !',
+                schema : {
+                    array : [
+                        {
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        },{
+                            name: "xxx",
+                            category: 1,
+                            value: 3.50,
+                            description: "xxxx",
+                            quantity: 2,
+                            image: "path_to_image_or_url"
+                        }
+                    ]
+                }
             }
             #swagger.responses[404] = {
                 description: 'Nenhum produto encontrado com nome parecido ao informado!'
@@ -261,7 +364,15 @@ module.exports = {
             }
 
             #swagger.responses[200] = {
-                description: 'Produto atualizado com sucesso !'
+                description: 'Produto atualizado com sucesso !',
+                schema : {
+                    name: "xxx",
+                    category: 1,
+                    value: 3.50,
+                    description: "xxxx",
+                    quantity: 2,
+                    image: "path_to_image_or_url"
+                }
             }
             #swagger.responses[404] = {
                 description: 'Produto não encontrado !'

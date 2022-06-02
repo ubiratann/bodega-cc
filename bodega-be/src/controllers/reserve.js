@@ -17,7 +17,13 @@ module.exports = {
             }
 
             #swagger.responses[200] = {
-                description: 'Produto reservado com sucesso!'
+                description: 'Produto reservado com sucesso!',
+                schema : {
+                    product_id: 1,
+                    user_id : 2,
+                    quantity: 3,
+                    inclusion_time : "25/01/1999"
+                }
             }
             #swagger.responses[403] = {
                 description: 'Não foi possível efetuar essa reserva!'

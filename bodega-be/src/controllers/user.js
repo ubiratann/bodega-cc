@@ -17,7 +17,12 @@ module.exports = {
             }
 
             #swagger.responses[200] = {
-                description: 'Usuário cadastrado com sucesso !'
+                description: 'Usuário cadastrado com sucesso !',
+                schema : {
+                    name: "name",
+                    email: "email@email.com",
+                    password: "password"
+                }
             }
             #swagger.responses[400] = {
                 description: 'Algum dado obrigatório não foi preenchido!'
