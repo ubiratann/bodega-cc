@@ -5,7 +5,7 @@ module.exports = {
         /* 	#swagger.tags = ['Usuário']
             #swagger.summary = 'Registro do usuário'
             #swagger.description = 'JSON com informações de registro'
-            #swagger.parameters[''] = {
+            #swagger.parameters['obj'] = {
                 in: 'body',
                 description: 'Quantidade a ser reservada',
                 required: true,
@@ -49,7 +49,7 @@ module.exports = {
          	#swagger.tags = ['Usuário']
             #swagger.summary = 'Login do usuário'
             #swagger.description = 'Loga usuário no sistema'
-            #swagger.parameters[''] = {
+            #swagger.parameters['obj'] = {
                 in: 'body',
                 description: 'JSON com informações de login',
                 required: true,

@@ -4,7 +4,7 @@ module.exports = {
         /*	#swagger.tags = ['Reserva Produto']
             #swagger.summary = 'Reserva um produto'
             #swagger.description = 'Reserva um produto no banco de dados associando produto, quantidade e usuário'
-            #swagger.parameters[''] = {
+            #swagger.parameters['obj'] = {
                 in: 'body',
                 description: 'Objeto com informações para criar reserva',
                 required: true,

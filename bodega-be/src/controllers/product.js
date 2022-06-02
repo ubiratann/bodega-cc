@@ -26,7 +26,7 @@ module.exports = {
             #swagger.summary = 'Recupera produtos por categoria'
             #swagger.description = 'Recupera todos os os produtos de uma categoria'
             #swagger.parameters['id'] = {
-                in: 'query',
+                in: 'path',
                 description: 'Id da categoria',
                 required: true,
                 type: 'number',
@@ -59,7 +59,7 @@ module.exports = {
             #swagger.summary = 'Recupera produtos com valores superiores ao informado'
             #swagger.description = 'Recupera produtos com valores superiores ao informado no corpo da requisição'
             #swagger.parameters['value'] = {
-                in: 'query',
+                in: 'path',
                 description: 'Valor',
                 required: true,
                 type: 'number',
@@ -91,7 +91,7 @@ module.exports = {
             #swagger.summary = 'Recupera produtos com valores inferiores ao informado'
             #swagger.description = 'Recupera produtos com valores inferiores ao informado no corpo da requisição'
             #swagger.parameters['value'] = {
-                in: 'query',
+                in: 'path',
                 description: 'Valor',
                 required: true,
                 type: 'number',
@@ -123,7 +123,7 @@ module.exports = {
             #swagger.summary = 'Recupera produtos filtrando por nome'
             #swagger.description = 'Recupera produtos que possuem nomes parecidos com o nome informado'
             #swagger.parameters['name'] = {
-                in: 'query',
+                in: 'path',
                 description: 'Nome que será pesquisado',
                 required: true,
                 type: 'string',
@@ -164,12 +164,11 @@ module.exports = {
             #swagger.tags = ['Produto']
             #swagger.summary = 'Cria produto'
             #swagger.description = 'Insere produtos no bancos de dados'
-            #swagger.parameters[''] = {
+            #swagger.parameters['obj'] = {
                 in: 'body',
                 description: 'Json com campos do produto',
                 required: true,
                 type: 'string',
-                format: 'string',
                 schema : {
                     name: "Régua",
                     category: 1,
@@ -215,7 +214,7 @@ module.exports = {
             #swagger.summary = 'Deleta produto'
             #swagger.description = 'Deleta produto do banco de dados'
             #swagger.parameters['id'] = {
-                in: 'query',
+                in: 'path',
                 description: 'Id do produto',
                 required: true,
                 type: 'number',
@@ -245,18 +244,17 @@ module.exports = {
             #swagger.summary = 'Atualiza preço do produto'
             #swagger.description = 'Atualiza preço de um produto no banco de dados'
             #swagger.parameters['id'] = {
-                in: 'query',
+                in: 'path',
                 description: 'Id do produto',
                 required: true,
                 type: 'number',
                 format: 'int64'
             }
-            #swagger.parameters[''] = {
+            #swagger.parameters['obj'] = {
                 in: 'body',
                 description: 'Json com novo valor',
                 required: true,
                 type: 'number',
-                format: 'int64',
                 schema : {
                     value : 1.99
                 }
