@@ -9,9 +9,9 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerFile = require('./src/swagger/swagger_output.json');
 
 // Router
-const router = require('express').Router();
 const productsRouter = require("./src/routes/product")
 const usersRouter    = require("./src/routes/user")
+const reserveRouter  = require("./src/routes/reserve")
 
 // Application setup
 const app = express()
@@ -24,5 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use("/product", productsRouter)
 app.use("/user", usersRouter)
+app.use("/reserve", reserveRouter)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`)) 

@@ -39,7 +39,7 @@
         "description": "Insere produtos no bancos de dados",
         "parameters": [
           {
-            "name": "body",
+            "name": "",
             "in": "body",
             "description": "Json com campos do produto",
             "required": true,
@@ -77,7 +77,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Produto criado com sucesso !"
+            "description": "Produto criado com sucesso!"
+          },
+          "400": {
+            "description": "Algum dado obrigatório não foi preenchido!"
           },
           "500": {
             "description": "Erro interno no servidor"
@@ -95,7 +98,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "number",
             "description": "Id da categoria",
@@ -104,7 +107,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Busca realizada com sucesso !"
+            "description": "Busca realizada com sucesso!"
+          },
+          "404": {
+            "description": "Nenhum produto encontrado na categoria informada!"
           }
         }
       }
@@ -119,7 +125,7 @@
         "parameters": [
           {
             "name": "value",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "number",
             "description": "Valor",
@@ -129,6 +135,9 @@
         "responses": {
           "200": {
             "description": "Busca realizada com sucesso !"
+          },
+          "404": {
+            "description": "Nenhum produto encontrado na faixa de preço indicada!"
           },
           "500": {
             "description": "Erro interno no servidor"
@@ -146,7 +155,7 @@
         "parameters": [
           {
             "name": "value",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "number",
             "description": "Valor",
@@ -156,6 +165,9 @@
         "responses": {
           "200": {
             "description": "Busca realizada com sucesso !"
+          },
+          "404": {
+            "description": "Nenhum produto encontrado na faixa de preço indicada!"
           },
           "500": {
             "description": "Erro interno no servidor"
@@ -173,7 +185,7 @@
         "parameters": [
           {
             "name": "name",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "string",
             "description": "Nome que será pesquisado",
@@ -185,7 +197,7 @@
             "description": "Busca realizada com sucesso !"
           },
           "404": {
-            "description": "Nenhum produto encontrado"
+            "description": "Nenhum produto encontrado com nome parecido ao informado!"
           },
           "500": {
             "description": "Erro interno no servidor"
@@ -203,14 +215,24 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "number",
             "description": "Id do produto",
             "format": "int64"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Produto deletado com sucesso!"
+          },
+          "404": {
+            "description": "Nenhum produto encontrado com o codigo informado!"
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
       }
     },
     "/product/updatePrice/{id}": {
@@ -223,47 +245,16 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "number",
             "description": "Id do produto",
             "format": "int64"
           },
           {
-            "name": "body",
+            "name": "",
             "in": "body",
             "description": "Json com novo valor",
-            "required": true,
-            "format": "int64",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/product/reserve/{id}": {
-      "put": {
-        "tags": [
-          "Produto"
-        ],
-        "summary": "Reserva produto",
-        "description": "Reserva um produto no banco de dados",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "number",
-            "description": "Id do produto",
-            "format": "int64"
-          },
-          {
-            "name": "quantity",
-            "in": "body",
-            "description": "Quantidade a ser reservada",
             "required": true,
             "format": "int64",
             "schema": {
@@ -271,36 +262,7 @@
               "properties": {
                 "value": {
                   "type": "number",
-                  "example": 3
-                }
-              }
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/user/": {
-      "post": {
-        "tags": [
-          "Usuário"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "name": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
+                  "example": 1.99
                 }
               }
             }
@@ -308,7 +270,58 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Produto atualizado com sucesso !"
+          },
+          "404": {
+            "description": "Produto não encontrado !"
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      }
+    },
+    "/user/": {
+      "post": {
+        "tags": [
+          "Usuário"
+        ],
+        "summary": "Registro do usuário",
+        "description": "JSON com informações de registro",
+        "parameters": [
+          {
+            "name": "",
+            "in": "body",
+            "description": "Quantidade a ser reservada",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário cadastrado com sucesso !"
+          },
+          "400": {
+            "description": "Algum dado obrigatório não foi preenchido!"
+          },
+          "500": {
+            "description": "Erro interno no servidor"
           }
         }
       }
@@ -318,19 +331,24 @@
         "tags": [
           "Usuário"
         ],
-        "description": "",
+        "summary": "Login do usuário",
+        "description": "Loga usuário no sistema",
         "parameters": [
           {
-            "name": "body",
+            "name": "",
             "in": "body",
+            "description": "JSON com informações de login",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "email@email.com"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "password"
                 }
               }
             }
@@ -338,7 +356,62 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Usuário logado no sistema!"
+          },
+          "401": {
+            "description": "Credenciais inválidas!"
+          },
+          "500": {
+            "description": "Erro interno no servidor!"
+          }
+        }
+      }
+    },
+    "/reserve/": {
+      "post": {
+        "tags": [
+          "Reserva Produto"
+        ],
+        "summary": "Reserva um produto",
+        "description": "Reserva um produto no banco de dados associando produto, quantidade e usuário",
+        "parameters": [
+          {
+            "name": "",
+            "in": "body",
+            "description": "Objeto com informações para criar reserva",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "user_id": {
+                  "type": "number",
+                  "example": 2
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 3
+                },
+                "inclusion_time": {
+                  "type": "string",
+                  "example": "25/01/1999"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto reservado com sucesso!"
+          },
+          "403": {
+            "description": "Não foi possível efetuar essa reserva!"
+          },
+          "500": {
+            "description": "Erro interno no servidor!"
           }
         }
       }
