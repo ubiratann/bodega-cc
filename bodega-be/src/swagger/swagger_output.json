@@ -27,7 +27,50 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Busca realizada com sucesso!",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "array": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "xxx"
+                      },
+                      "category": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 3.5
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "xxxx"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "path_to_image_or_url"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhum produto encontrado na categoria informada!"
           }
         }
       },
@@ -39,11 +82,10 @@
         "description": "Insere produtos no bancos de dados",
         "parameters": [
           {
-            "name": "",
+            "name": "obj",
             "in": "body",
             "description": "Json com campos do produto",
             "required": true,
-            "format": "string",
             "schema": {
               "type": "object",
               "properties": {
@@ -98,7 +140,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
             "required": true,
             "type": "number",
             "description": "Id da categoria",
@@ -107,7 +149,47 @@
         ],
         "responses": {
           "200": {
-            "description": "Busca realizada com sucesso!"
+            "description": "Busca realizada com sucesso!",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "array": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "xxx"
+                      },
+                      "category": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 3.5
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "xxxx"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "path_to_image_or_url"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
             "description": "Nenhum produto encontrado na categoria informada!"
@@ -125,7 +207,7 @@
         "parameters": [
           {
             "name": "value",
-            "in": "query",
+            "in": "path",
             "required": true,
             "type": "number",
             "description": "Valor",
@@ -134,7 +216,47 @@
         ],
         "responses": {
           "200": {
-            "description": "Busca realizada com sucesso !"
+            "description": "Busca realizada com sucesso !",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "array": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "xxx"
+                      },
+                      "category": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 3.5
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "xxxx"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "path_to_image_or_url"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
             "description": "Nenhum produto encontrado na faixa de preço indicada!"
@@ -155,7 +277,7 @@
         "parameters": [
           {
             "name": "value",
-            "in": "query",
+            "in": "path",
             "required": true,
             "type": "number",
             "description": "Valor",
@@ -164,7 +286,47 @@
         ],
         "responses": {
           "200": {
-            "description": "Busca realizada com sucesso !"
+            "description": "Busca realizada com sucesso !",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "array": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "xxx"
+                      },
+                      "category": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 3.5
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "xxxx"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "path_to_image_or_url"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
             "description": "Nenhum produto encontrado na faixa de preço indicada!"
@@ -185,7 +347,7 @@
         "parameters": [
           {
             "name": "name",
-            "in": "query",
+            "in": "path",
             "required": true,
             "type": "string",
             "description": "Nome que será pesquisado",
@@ -194,7 +356,47 @@
         ],
         "responses": {
           "200": {
-            "description": "Busca realizada com sucesso !"
+            "description": "Busca realizada com sucesso !",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "array": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "xxx"
+                      },
+                      "category": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 3.5
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "xxxx"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "path_to_image_or_url"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
             "description": "Nenhum produto encontrado com nome parecido ao informado!"
@@ -215,7 +417,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
             "required": true,
             "type": "number",
             "description": "Id do produto",
@@ -245,18 +447,17 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
             "required": true,
             "type": "number",
             "description": "Id do produto",
             "format": "int64"
           },
           {
-            "name": "",
+            "name": "obj",
             "in": "body",
             "description": "Json com novo valor",
             "required": true,
-            "format": "int64",
             "schema": {
               "type": "object",
               "properties": {
@@ -270,7 +471,39 @@
         ],
         "responses": {
           "200": {
-            "description": "Produto atualizado com sucesso !"
+            "description": "Produto atualizado com sucesso !",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "xxx"
+                },
+                "category": {
+                  "type": "number",
+                  "example": 1
+                },
+                "value": {
+                  "type": "number",
+                  "example": 3.5
+                },
+                "description": {
+                  "type": "string",
+                  "example": "xxxx"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 2
+                },
+                "image": {
+                  "type": "string",
+                  "example": "path_to_image_or_url"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
             "description": "Produto não encontrado !"
@@ -290,7 +523,7 @@
         "description": "JSON com informações de registro",
         "parameters": [
           {
-            "name": "",
+            "name": "obj",
             "in": "body",
             "description": "Quantidade a ser reservada",
             "required": true,
@@ -315,7 +548,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Usuário cadastrado com sucesso !"
+            "description": "Usuário cadastrado com sucesso !",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
             "description": "Algum dado obrigatório não foi preenchido!"
@@ -335,7 +588,7 @@
         "description": "Loga usuário no sistema",
         "parameters": [
           {
-            "name": "",
+            "name": "obj",
             "in": "body",
             "description": "JSON com informações de login",
             "required": true,
@@ -376,7 +629,7 @@
         "description": "Reserva um produto no banco de dados associando produto, quantidade e usuário",
         "parameters": [
           {
-            "name": "",
+            "name": "obj",
             "in": "body",
             "description": "Objeto com informações para criar reserva",
             "required": true,
@@ -405,7 +658,31 @@
         ],
         "responses": {
           "200": {
-            "description": "Produto reservado com sucesso!"
+            "description": "Produto reservado com sucesso!",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "user_id": {
+                  "type": "number",
+                  "example": 2
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 3
+                },
+                "inclusion_time": {
+                  "type": "string",
+                  "example": "25/01/1999"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "403": {
             "description": "Não foi possível efetuar essa reserva!"
