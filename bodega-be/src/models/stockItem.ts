@@ -10,10 +10,9 @@ export class StockItem{
     @Column()
     status: number;
 
-    @ManyToOne(() => Product)
+    @ManyToOne(() => Product, (product) => product.stockItems)
     product: Product;
 
-    @RelationId((stockItem: StockItem) => stockItem.product)
-    productId;
+
 
 }

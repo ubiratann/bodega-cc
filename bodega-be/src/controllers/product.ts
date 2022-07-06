@@ -1,65 +1,81 @@
-import { StatusCodes } from "http-status-codes";
 import { Request, Response } from "express";
-import { Product } from "../models/product";
-import { AppDataSource } from "../data-source";
-import { GenericController } from "./generic";
+import { StatusCodes } from "http-status-codes";
 import { Equal, FindManyOptions, LessThan, Like, MoreThan } from "typeorm";
-import { handler } from "../util/defaultErrorHandler";
-import { ApiError } from "../util/apiError";
+import { AppDataSource } from "../data-source";
+import { apimethod } from "../decorators/apimethod";
+import { Product } from "../models/product";
 import { StockItem } from "../models/stockItem";
+import { ApiError } from "../util/apiError";
 
 
 const AVAILABLE = 1
 const RESERVED = 2
-class ProductController extends GenericController<Product>{
+const PRODUCTS_PER_PAGE = 2
 
-    constructor(){
-        super();
-        this.repository = AppDataSource.getRepository(Product);
-    }
+class ProductController {
 
-    async  getAll(request: Request, response:Response){
+
+    @apimethod
+    async getAll(request: Request, response:Response){
         let { page } = request.params;
+        const repository = AppDataSource.getRepository(Product);
+
         const findOptions: FindManyOptions = {
-            skip: this.PRODUCTS_PER_PAGE * +page,
-            take: this.PRODUCTS_PER_PAGE,
-            relations: ["stockItems"],
+            skip: PRODUCTS_PER_PAGE * +page,
+            take: PRODUCTS_PER_PAGE,
+            relations: {
+                stockItems: true, 
+                category: true,
+            },
             where: {
                 stockItems : {
-                    status: Equal(1)
+                    status: Equal(AVAILABLE)
                 },
             },
-
         }
-
-        this.repository.createQueryBuilder("product")
-            .where("p")
-            .skip
+        let res: Product[] = await repository.find(findOptions);
+        response.status(StatusCodes.OK).send(res);
+        
     }
     
+    @apimethod
     async  getByCategory(request: Request, response:Response){
-        let { categoryId, page } = request.params
+        let { categoryId, page } = request.params;
+        const repository = AppDataSource.getRepository(Product);
+
         const findOptions: FindManyOptions = {
-            skip: this.PRODUCTS_PER_PAGE * +page,
-            take: this.PRODUCTS_PER_PAGE,
-            relations: ["stockItems"],
+            skip: PRODUCTS_PER_PAGE * +page,
+            take: PRODUCTS_PER_PAGE,
+            relations: {
+                stockItems: true, 
+                category: true,
+            },
             where: {
                 stockItems : {
                     status: Equal(1)
                 },
-                categoryId: Equal(+categoryId),
+                category:{
+                    id: Equal(+categoryId),
+                }
             }
         }
         
-        await this.findMany(request, response, findOptions);
+        let res: Product[] = await repository.find(findOptions);
+        response.status(StatusCodes.OK).send(res);
     }
     
+    @apimethod
     async  getByHigherValue(request: Request, response:Response){
-        let { value, page } = request.params
+        let { value, page } = request.params;
+        const repository = AppDataSource.getRepository(Product);
+
         const findOptions: FindManyOptions = {
-            skip: this.PRODUCTS_PER_PAGE * +page,
-            take: this.PRODUCTS_PER_PAGE,
-            relations: ["stockItems"],
+            skip: PRODUCTS_PER_PAGE * +page,
+            take: PRODUCTS_PER_PAGE,
+            relations: {
+                stockItems: true, 
+                category: true,
+            },
             where: {
                 stockItems : {
                     status: Equal(1)
@@ -68,15 +84,22 @@ class ProductController extends GenericController<Product>{
             }
         }
         
-        await this.findMany(request, response, findOptions);
+        let res: Product[] = await repository.find(findOptions);
+        response.status(StatusCodes.OK).send(res);
     }
     
+    @apimethod
     async  getByLowerValue(request: Request, response:Response){
-        let { value, page } = request.params
+        let { value, page } = request.params;
+        const repository = AppDataSource.getRepository(Product);
+
         const findOptions: FindManyOptions = {
-            skip: this.PRODUCTS_PER_PAGE * +page,
-            take: this.PRODUCTS_PER_PAGE,
-            relations: ["stockItems"],
+            skip: PRODUCTS_PER_PAGE * +page,
+            take: PRODUCTS_PER_PAGE,
+            relations: {
+                stockItems: true, 
+                category: true,
+            },
             where: {
                 stockItems : {
                     status: Equal(1)
@@ -85,14 +108,18 @@ class ProductController extends GenericController<Product>{
             }
         }
 
-        await this.findMany(request, response, findOptions);
+        let res: Product[] = await repository.find(findOptions);
+        response.status(StatusCodes.OK).send(res);
     }
     
+    @apimethod
     async  getByName (request: Request, response:Response){
-        let { name, page } = request.params
+        let { name, page } = request.params;
+        const repository = AppDataSource.getRepository(Product);
+
         const findOptions: FindManyOptions = {
-            skip: this.PRODUCTS_PER_PAGE * +page,
-            take: this.PRODUCTS_PER_PAGE,
+            skip: PRODUCTS_PER_PAGE * +page,
+            take: PRODUCTS_PER_PAGE,
             relations: ["stockItems"],
             where: {
                 stockItems : {
@@ -102,57 +129,65 @@ class ProductController extends GenericController<Product>{
             }
         }
 
-        await this.findMany(request, response, findOptions);
+        let res: Product[] = await repository.find(findOptions);
+        response.status(StatusCodes.OK).send(res);
     }
         
+    @apimethod
     async  updatePrice(request: Request, response:Response){        
-        try{
-            let { id, newPrice } = request.body;
-            let product: Product = await this.repository.findOneBy({id:id});
-            product.price = newPrice;
-            await this.repository.save(product);
-        }catch(error){
-            handler(error, response);
-        }
+        let { id, newPrice } = request.body;
+        const repository = AppDataSource.getRepository(Product);
+
+        let product: Product = await repository.findOneBy({id:id});
+        product.price = newPrice;
+       
+        let res = await repository.save(product);
+        response.status(StatusCodes.OK).send(res);
     }
 
+    @apimethod
     async save(request: Request, response: Response): Promise<void>{
-        try{
-            let entity: Product = { ...request.body } ;
-            // console.log(entity)
-            
-            if(entity.categoryId == null)
-                throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com categoria vazia!")
+        let entity: Product = { ...request.body } ;
+        const repository = AppDataSource.getRepository(Product);
+        console.log("entrou")
+        // if(entity.categoryId == null)
+        //     throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com categoria vazia!")
 
-            if(entity.description == null || entity.description.trim() == "")
-                throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com descrição vazia!")
+        if(entity.description == null || entity.description.trim() == "")
+            throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com descrição vazia!")
 
-            if(entity.description == null || entity.image.trim() == "")
-                throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com imagem vazia!")
+        if(entity.description == null || entity.image.trim() == "")
+            throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com imagem vazia!")
 
-            if(entity.description == null || entity.name.trim() == "")
-                throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com nome vazio!")
+        if(entity.description == null || entity.name.trim() == "")
+            throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com nome vazio!")
 
-            let res = await this.repository.save(entity);
-
+        let res = await repository.save(
+            repository.create(entity)
+        );
+        
+        if(res.id){
+            res.stockItemIds = []
+    
             const stockItemRepository = AppDataSource.getRepository(StockItem);
-            for(let i = 0; i <= entity.quantity; i++ ){
+            
+            for(let i = 0; i < entity.quantity; i++ ){
                 let stockItem = new StockItem()
                 
                 stockItem.status = AVAILABLE;
-                stockItem.productId = res.id;
+                stockItem.product = res ;
 
-                res.stockItemIds.push((await stockItemRepository.save(stockItem)).id);
+                console.log(stockItem)
+                res.stockItemIds.push((await stockItemRepository.save(
+                    stockItemRepository.create(stockItem))).id);
             }
-
-            response.status(StatusCodes.OK).send(res);
-        }catch(error){
-            handler(error, response)
         }
+
+        response.status(StatusCodes.CREATED).send(res);
     }
     
 
 }    
 
-export default new ProductController();
+export default ProductController;
 

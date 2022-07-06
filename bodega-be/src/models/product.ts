@@ -26,7 +26,8 @@ export class Product{
     // @Column()
     // status: number;
     
-    @OneToOne(() => Category)
+    @ManyToOne(() => Category)
+    // @JoinColumn({name:"categoryId"})
     category: Category
 
     @RelationId((product: Product) => product.category)
@@ -39,15 +40,11 @@ export class Product{
     
     @AfterLoad()
     setQuantity() {
-        this.quantity = this.stockItems.length
+        if(this.stockItems != null)
+            this.quantity = this.stockItems.length
     }
 
-    @AfterLoad()
-    setStockItemIds(){
-        for(let item of this.stockItems){
-            this.stockItemIds.push(item.id)
-        }
-    }
+
     
 
 }
