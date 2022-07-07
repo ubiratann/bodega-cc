@@ -24,7 +24,7 @@ class ItemTable extends React.Component {
   submit = () => {
     this.state.cart.submit()
       .then(() => {
-        this.props.history.push('/path')
+        this.props.history.push('/home')
       });
   }
 
