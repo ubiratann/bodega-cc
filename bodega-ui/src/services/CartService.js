@@ -1,7 +1,7 @@
 import axios from "axios";
 import AuthService from "./AuthService";
 
-const baseUrl = "http://localhost:4000/product";
+const baseUrl = "http://localhost:4000/reserve";
 
 class CartService {
     constructor() {
@@ -40,11 +40,31 @@ class CartService {
         this.items = {};
     }
 
-    submit = async () => {
+    submit = async (products) => {
+        const getStockItemIds = (product, number) => {
+            let stockItemIds = [];
+            for(let i = 0; i < number; i++) {
+                stockItemIds.push(product.stockItemIds[i]);
+            }
+            return stockItemIds;
+        };
+
+        let stockItemIds = [];
+        for (let product in products) {
+            if (this.items.hasOwnProperty(product.id)) {
+                stockItemIds = stockItemIds.concat(getStockItemIds(product, this.items[product.id]));
+            }
+        }
+
         const auth = AuthService.getInstance();
-        const user = auth.user;
-        axios.get(`${baseUrl}/${page}`);
-        let resp = (await this.get(page)).data; // TODO: Mudar aqui!
+        const userId = auth.userId;
+
+        const data = {
+            userId: userId,
+            stockItemIds: stockItemIds
+        }
+
+        return await axios.post(`${baseUrl}`, data);
     }
 }
 
