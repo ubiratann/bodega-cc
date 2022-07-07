@@ -30,3 +30,37 @@
     margin-bottom: 20px;
   }
 }
+
+div.buttons {
+  float: right;
+}
+
+div.buttons .btn {
+  margin: 1px 5px;
+  padding: 2px 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+div.buttons .btn.important {
+  color: white;
+  border-color: rgb(3, 37, 56);
+  background-color: rgb(5, 68, 104);
+}
+
+div.buttons .btn.important:hover {
+  border-color: rgb(4, 55, 84);
+  background-color: rgb(12, 94, 141);
+}
+
+div.buttons .btn.cancel {
+  border-color: rgb(144, 144, 144);
+  background-color: rgb(175, 175, 175);
+}
+
+div.buttons .btn.cancel:hover {
+  border-color: rgb(169, 169, 169);
+  background-color: rgb(209, 209, 209);
+}

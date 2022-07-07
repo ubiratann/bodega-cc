@@ -1,4 +1,9 @@
-class Cart {
+import axios from "axios";
+import AuthService from "./AuthService";
+
+const baseUrl = "http://localhost:4000/product";
+
+class CartService {
     constructor() {
         this.items = {};
     }
@@ -34,6 +39,13 @@ class Cart {
     reset = () => {
         this.items = {};
     }
+
+    submit = async () => {
+        const auth = AuthService.getInstance();
+        const user = auth.user;
+        axios.get(`${baseUrl}/${page}`);
+        let resp = (await this.get(page)).data; // TODO: Mudar aqui!
+    }
 }
 
-export default Cart;
+export default CartService;

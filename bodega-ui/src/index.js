@@ -16,10 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const links = [
   { display: "Home", url: "/", active: false },
   { display: "Novo Produto", url: "/register-product", active: false },
-  { display: "People", url: "#", active: false },
-  { display: "Perfomance", url: "#", active: false },
-  { display: "Development", url: "#", active: false },
-  { display: "Reports", url: "#", active: false },
+  { display: "Reservas", url: "/reservations", active: false },
   { display: "Admin", url: "/admin", active: false },
   { display: "Sair", url: "/logout", active: false },
 ];

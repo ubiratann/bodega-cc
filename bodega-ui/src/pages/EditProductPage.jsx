@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 import MainContent from '../components/MainContent';
 import ProductService from '../services/ProductService';
 
-class RegisterProductPage extends React.Component {
+class EditProductPage extends React.Component {
   constructor(props) {
     super(props);
     const links = [...props.links];
@@ -121,4 +121,4 @@ class RegisterProductPage extends React.Component {
   }
 }
 
-export default RegisterProductPage;
+export default EditProductPage;
