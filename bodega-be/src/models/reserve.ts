@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, RelationId } from "typeorm";
+import { CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, RelationId } from "typeorm";
 import { ReserveItem } from "./reserveItem";
 import { User } from "./user";
 
@@ -14,9 +14,9 @@ export class Reserve{
     @RelationId((reserve: Reserve) => reserve.user)
     userId: number;
 
-    // @Column()
-    // quantity: number;
-
     @OneToMany(() => ReserveItem, (reserveItem) => reserveItem.reserve)
     reserveItems: ReserveItem[];
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

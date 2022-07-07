@@ -3,6 +3,6 @@ import ReserveController from "../controllers/reserve";
 
 const ReserveRouter = Router();
 
-ReserveRouter.post("/", ReserveController .save);
+ReserveRouter.post("/", new ReserveController() .save);
 
 export { ReserveRouter };
