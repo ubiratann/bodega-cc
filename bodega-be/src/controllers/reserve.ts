@@ -17,6 +17,7 @@ class ReserveController {
     @apimethod
     async save(request: Request, response: Response){
         const data = request.body;
+        console.log(data);
 
         const userRepository = AppDataSource.getRepository(User);
         const stockItemRepository = AppDataSource.getRepository(StockItem);

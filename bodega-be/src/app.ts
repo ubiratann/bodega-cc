@@ -6,6 +6,7 @@ import CategoryRouter from "./routes/category";
 import ReserveRouter from "./routes/reserve";
 
 import express from "express";
+import cors from "cors";
 import { AppDataSource } from "./data-source";
 
 const app = express();
@@ -16,6 +17,13 @@ AppDataSource.initialize().then(() => {
     console.log(error)
 });
 
+const allowedOrigins = ['*'];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
+app.use(cors(options));
 app.use(express.json()); 
 app.use("/product", ProductRouter);
 app.use("/user", UserRouter);

@@ -5,6 +5,7 @@ import CartService from '../services/CartService';
 import ProductService from '../services/ProductService';
 
 class ItemTable extends React.Component {
+  
   constructor(props) {
     super(props); 
     this.state = {
@@ -13,7 +14,7 @@ class ItemTable extends React.Component {
       blocked: false
     };
   }
-
+  
   componentDidMount = () => {
     ProductService.getAll().then((resp) => {
       this.setState({ items: resp });
@@ -22,9 +23,9 @@ class ItemTable extends React.Component {
   }
 
   submit = () => {
-    this.state.cart.submit()
+    this.state.cart.submit(this.state.items)
       .then(() => {
-        this.props.history.push('/home')
+        window.location.href= '/reservations';
       });
   }
 

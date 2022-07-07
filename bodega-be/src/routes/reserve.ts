@@ -4,7 +4,7 @@ import { Reserve } from "../models/reserve";
 
 const ReserveRouter = Router();
 
-ReserveRouter.post("/", new ReserveController().save);
+ReserveRouter.put("/", new ReserveController().save);
 ReserveRouter.get("/:userId", new ReserveController().get);
 
 export default ReserveRouter;

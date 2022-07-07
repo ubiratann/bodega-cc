@@ -44,13 +44,14 @@ class CartService {
         const getStockItemIds = (product, number) => {
             let stockItemIds = [];
             for(let i = 0; i < number; i++) {
-                stockItemIds.push(product.stockItemIds[i]);
+                stockItemIds.push(product.stockItems[i].id);
             }
             return stockItemIds;
         };
 
         let stockItemIds = [];
-        for (let product in products) {
+        for (let i = 0; i < products.length; i++) {
+            const product = products[i];
             if (this.items.hasOwnProperty(product.id)) {
                 stockItemIds = stockItemIds.concat(getStockItemIds(product, this.items[product.id]));
             }
@@ -59,12 +60,14 @@ class CartService {
         const auth = AuthService.getInstance();
         const userId = auth.userId;
 
-        const data = {
+        const payload = {
             userId: userId,
             stockItemIds: stockItemIds
         }
 
-        return await axios.post(`${baseUrl}`, data);
+        console.log(payload);
+
+        return axios.put(`${baseUrl}`, payload);
     }
 }
 

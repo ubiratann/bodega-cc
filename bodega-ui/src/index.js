@@ -9,6 +9,7 @@ import './index.css';
 import ItemsSearchPage from './pages/ItemsSearchPage';
 import AdministrationPage from './pages/AdministrationPage';
 import RegisterProductPage from './pages/RegisterProductPage';
+import ReservationsPage from './pages/ReservationsPage';
 import LogInPage from './pages/LogInPage';
 import reportWebVitals from './reportWebVitals';
 
@@ -28,6 +29,7 @@ root.render(
       <Route path="/admin" element={<AdministrationPage links={links}/>} />
       <Route path="/register-product" element={<RegisterProductPage links={links}/>} />
       <Route path="/login" element={<LogInPage/>} />
+      <Route path="/reservations" element={<ReservationsPage links={links}/>} />
       {/* <Route path="/sigin" element={<SigInPage/>} /> */}
     </Routes>
   </BrowserRouter>
