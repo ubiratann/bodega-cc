@@ -1,7 +1,7 @@
 import axios from "axios";
 import AuthService from "./AuthService";
 
-const baseUrl = "http://localhost:4000/product";
+const baseUrl = "http://localhost:4000/reserve";
 
 class CartService {
     constructor() {

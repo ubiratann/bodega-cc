@@ -1,12 +1,27 @@
 import React from 'react';
 import './Sidebar.css';
+import AuthService from '../services/AuthService';
+import { Link } from 'react-router-dom';
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      redirect: false
+    }
+  }
+
+  logout = () => {
+    AuthService.doLogout();
+    this.setState({redirect: true});
   }
 
   render() {
+    const auth = AuthService.getInstance();
+    if (!auth.authenticated) {
+      window.location.href = "/login";
+    }
+    
     return (
       <div className="sidebar">
         <div className="title">
@@ -15,15 +30,24 @@ class Sidebar extends React.Component {
         <ul>
           {
             this.props.links.map(function (link, i) {
+              if (!link.userTypes.includes(AuthService.getInstance().userType)){
+                return;
+              }
+              
               return (
                 <li key={i}>
-                  <a className={link.active ? "active" : ""} href={link.url}>
-                    <span className="item">{link.display}</span>
-                  </a>
+                  <Link 
+                    className={link.active ? "a active" : "a"} 
+                    to={link.url}>
+                    {link.display}
+                  </Link>
                 </li>
               );
             })
           }
+          <li>
+            <a className='a' onClick={this.logout}>Sair</a>
+          </li>
         </ul>
       </div>
     );

@@ -12,6 +12,8 @@ class ReservationsPage extends React.Component {
     links.forEach((value) => { 
       if(value.display == "Reservas"){
         value.active = true;
+      } else {
+        value.active = false;
       }
     });
 

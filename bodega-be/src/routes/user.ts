@@ -5,7 +5,7 @@ import authMiddleware from "../middlewares/auth";
 
 const UserRouter = express.Router();
 
-UserRouter.post("/", authMiddleware, new UserController().save);
+UserRouter.post("/", new UserController().save);
 UserRouter.post("/login", new AuthController().authenticate);
 
 export default UserRouter;

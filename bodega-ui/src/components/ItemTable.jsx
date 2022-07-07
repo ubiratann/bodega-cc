@@ -3,6 +3,7 @@ import './ItemTable.css';
 import ItemCard from './ItemCard';
 import CartService from '../services/CartService';
 import ProductService from '../services/ProductService';
+import {Navigate} from 'react-router-dom';
 
 class ItemTable extends React.Component {
   
@@ -11,7 +12,7 @@ class ItemTable extends React.Component {
     this.state = {
       items: [],
       cart: new CartService(),
-      blocked: false
+      redirect: false
     };
   }
   
@@ -25,7 +26,7 @@ class ItemTable extends React.Component {
   submit = () => {
     this.state.cart.submit(this.state.items)
       .then(() => {
-        window.location.href= '/reservations';
+        this.setState({ redirect: true });
       });
   }
 
@@ -42,6 +43,11 @@ class ItemTable extends React.Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return (
+        <Navigate to="/reservations"/>
+      )
+    }
     return (
       <>
         {this.arrayChunk(3).map((row, key) => (

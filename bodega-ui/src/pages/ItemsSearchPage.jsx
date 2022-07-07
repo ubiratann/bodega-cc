@@ -12,6 +12,8 @@ class ItemsSearchPage extends React.Component {
     links.forEach((value) => { 
       if(value.display == "Home"){
         value.active = true;
+      } else {
+        value.active = false;
       }
     });
 

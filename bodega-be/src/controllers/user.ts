@@ -42,4 +42,4 @@ class UserController{
     }
 }
 
-export default  UserController;
+export default UserController;

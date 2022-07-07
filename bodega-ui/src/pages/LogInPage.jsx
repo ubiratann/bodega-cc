@@ -1,11 +1,16 @@
 import React from 'react';
+import { Navigate } from "react-router-dom";
+import AuthService from '../services/AuthService';
 import './LogInPage.css';
 
 class LogInPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessages: {}
+      errorMessages: {},
+      email: "",
+      password: "",
+      logged: false
     }
   }
 
@@ -16,35 +21,31 @@ class LogInPage extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    var { uname, pass } = document.forms[0];
-
-    const userData = { name: "Daniel", email: "danielnreboucas@hotmail.com", token: "asdasdasd"}; //get from backend
-
-    // if (userData) {
-    //   if (userData.password !== pass.value) {
-    //     // Invalid password
-    //     setErrorMessages({ name: "pass", message: errors.pass });
-    //   } else {
-    //     setIsSubmitted(true);
-    //   }
-    // } else {
-    //   // Username not found
-    //   setErrorMessages({ name: "uname", message: errors.uname });
-    // }
+    AuthService.doLogin(this.state.email, this.state.password).then(() => {
+      this.setState({ logged: true });
+    });
   };
 
   render() {
+    if (this.state.logged) {
+      return (
+        <Navigate to="/"/>
+      )
+    }
+
     return (
       <div className="App Login">
         <form className="login-page" onSubmit={this.handleSubmit}>
           <h5>Fazer Login</h5>
           <div className="input-container">
-            <label>Username </label>
-            <input type="text" name="uname" required />
+            <label>Email </label>
+            <input type="email" name="uemail" required value={this.state.email}
+                onChange={(e) => this.setState({ email: e.target.value })}/>
           </div>
           <div className="input-container">
             <label>Password </label>
-            <input type="password" name="pass" required />
+            <input type="password" name="pass" required value={this.state.password}
+                onChange={(e) => this.setState({ password: e.target.value })}/>
           </div>
           <div className="button-container">
             <input type="submit" />

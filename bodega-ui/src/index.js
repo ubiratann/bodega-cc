@@ -11,15 +11,15 @@ import AdministrationPage from './pages/AdministrationPage';
 import RegisterProductPage from './pages/RegisterProductPage';
 import ReservationsPage from './pages/ReservationsPage';
 import LogInPage from './pages/LogInPage';
+import SignInPage from './pages/SignInPage';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const links = [
-  { display: "Home", url: "/", active: false },
-  { display: "Novo Produto", url: "/register-product", active: false },
-  { display: "Reservas", url: "/reservations", active: false },
-  { display: "Admin", url: "/admin", active: false },
-  { display: "Sair", url: "/logout", active: false },
+  { display: "Home", url: "/", active: false, userTypes: [1] },
+  { display: "Novo Produto", url: "/register-product", active: false, userTypes: [2] },
+  { display: "Reservas", url: "/reservations", active: false, userTypes: [1] },
+  { display: "Admin", url: "/admin", active: false, userTypes: [2] },
 ];
 
 root.render(
@@ -28,9 +28,9 @@ root.render(
       <Route path="/" element={<ItemsSearchPage links={links}/>} />
       <Route path="/admin" element={<AdministrationPage links={links}/>} />
       <Route path="/register-product" element={<RegisterProductPage links={links}/>} />
-      <Route path="/login" element={<LogInPage/>} />
       <Route path="/reservations" element={<ReservationsPage links={links}/>} />
-      {/* <Route path="/sigin" element={<SigInPage/>} /> */}
+      <Route path="/login" element={<LogInPage/>} />
+      <Route path="/signin" element={<SignInPage/>} />
     </Routes>
   </BrowserRouter>
 );

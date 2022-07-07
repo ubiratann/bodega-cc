@@ -11,6 +11,8 @@ class AdministrationPage extends React.Component {
     links.forEach((value) => { 
       if(value.display == "Admin"){
         value.active = true;
+      } else {
+        value.active = false;
       }
     });
 
