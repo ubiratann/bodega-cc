@@ -14,7 +14,7 @@ export class ReserveItem{
     @RelationId((reserveItem: ReserveItem) => reserveItem.reserve)
     reserveId: number;
 
-    @OneToOne(() => StockItem)
+    @ManyToOne(() => StockItem)
     stockItem: StockItem
 
     @RelationId((reserveItem: ReserveItem) => reserveItem.stockItem)

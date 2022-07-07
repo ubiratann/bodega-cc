@@ -13,6 +13,9 @@ class UserTypeController {
       
         let entity: UserType = {...request.body};
         
+        if(entity.id != null )
+            throw new ApiError(StatusCodes.BAD_REQUEST, "O campo id não deve ser informado");
+
         if(entity.title == null || entity.title.trim() === "")
             throw new ApiError(StatusCodes.BAD_REQUEST, "O campo título é obrigatório");
         

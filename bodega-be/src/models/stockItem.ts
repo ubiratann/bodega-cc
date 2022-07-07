@@ -13,6 +13,4 @@ export class StockItem{
     @ManyToOne(() => Product, (product) => product.stockItems)
     product: Product;
 
-
-
 }

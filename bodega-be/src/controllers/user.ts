@@ -1,16 +1,12 @@
+import bcrypt from "bcryptjs";
+import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { Request, Response, } from "express";
 import { AppDataSource } from "../data-source";
-import { User } from "../models/user";
-import { handler } from "../util/defaultErrorHandler";
-import { ApiError } from "../util/apiError";
-import { GenericController } from "./generic";
-import bcrypt  from "bcryptjs";
 import { apimethod } from "../decorators/apimethod";
-
+import { User } from "../models/user";
+import { ApiError } from "../util/apiError";
 
 class UserController{
-
 
     @apimethod
     async login(request: Request, response: Response): Promise<void>{
@@ -18,7 +14,6 @@ class UserController{
         let entity: User = {...request.body};
         let repository = AppDataSource.getRepository(User);
         
-            
         let res: User = await repository.findOneBy({ email: entity.email });
         
         if(res == null)

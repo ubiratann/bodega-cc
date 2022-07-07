@@ -12,7 +12,7 @@ export class Product{
     @Column()
     name: string;
     
-    @Column()
+    @Column({type: "float"})
     price: number;
 
     @Column()
@@ -22,9 +22,6 @@ export class Product{
 
     @Column()
     image: string;
-
-    // @Column()
-    // status: number;
     
     @ManyToOne(() => Category)
     // @JoinColumn({name:"categoryId"})
