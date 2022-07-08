@@ -19,7 +19,6 @@ const links = [
   { display: "Home", url: "/", active: false, userTypes: [1] },
   { display: "Novo Produto", url: "/register-product", active: false, userTypes: [2] },
   { display: "Reservas", url: "/reservations", active: false, userTypes: [1] },
-  { display: "Admin", url: "/admin", active: false, userTypes: [2] },
 ];
 
 root.render(

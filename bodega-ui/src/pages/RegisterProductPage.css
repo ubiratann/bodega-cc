@@ -1,12 +1,31 @@
-* {
-  list-style: none;
-  text-decoration: none;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+.new-product {
+  margin-top: 15px;
 }
 
-body {
-  background: #f5f6fa;
+.new-product .buttons .buttons-place {
+  float: right;
+}
+
+.new-product .buttons .buttons-place .btn {
+  padding: 5px 5px;
+}
+
+.new-product .btn {
+  margin: 1px 5px;
+  padding: 2px 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.new-product .btn {
+  color: white;
+  border-color: rgb(3, 37, 56);
+  background-color: rgb(5, 68, 104);
+}
+
+.new-product .btn:hover {
+  border-color: rgb(7, 64, 97);
+  background-color: rgb(12, 94, 141);
 }
