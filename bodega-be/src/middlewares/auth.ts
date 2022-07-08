@@ -17,7 +17,7 @@ export default function authMiddleware(request: Request, response: Response, nex
         const { authorization } = request.headers;
     
         if(!authorization)
-            throw new ApiError(StatusCodes.UNAUTHORIZED, "Falha na autenticaçao do usuário");
+            throw new ApiError(StatusCodes.UNAUTHORIZED, "Falha no token de autenticaçao do usuário");
         
         const token = authorization.replace("Bearer", "").trim();
         const data = jwt.verify(token, "secret");
