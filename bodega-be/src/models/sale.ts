@@ -16,7 +16,7 @@ export class Sale{
     @RelationId((sale: Sale) => sale.user)
     userId: number;
 
-    @OneToOne(() => Reserve)
+    @OneToOne(() => Reserve, {nullable: true})
     reserve: Reserve
 
     @RelationId((sale: Sale) => sale.reserve)

@@ -1,22 +1,21 @@
 import { Router } from "express";
 import ProductController  from "../controllers/product";
+import authMiddleware from "../middlewares/auth";
 
 const ProductRouter = Router();
 
-ProductRouter.get("/:page", new ProductController().getAll);
+ProductRouter.get("/:page", authMiddleware, new ProductController().getAll);
 
-ProductRouter.get("/category/:id/:page", new ProductController().getByCategory);
+ProductRouter.get("/category/:id/:page", authMiddleware, new ProductController().getByCategory);
 
-ProductRouter.get("/price/higherThan/:value/:page", new ProductController().getByHigherValue);
+ProductRouter.get("/price/higherThan/:value/:page", authMiddleware, new ProductController().getByHigherValue);
 
-ProductRouter.get("/price/lowerThan/:value/:page", new ProductController().getByLowerValue);
+ProductRouter.get("/price/lowerThan/:value/:page", authMiddleware, new ProductController().getByLowerValue);
 
-ProductRouter.get("/name/:name/:page", new ProductController().getByName);
+ProductRouter.get("/name/:name/:page", authMiddleware, new ProductController().getByName);
 
-ProductRouter.post("/", new ProductController().save);
+ProductRouter.post("/", authMiddleware, new ProductController().save);
 
-// ProductRouter.delete("/:id", ProductController.remove);
-
-ProductRouter.put("/updatePrice/:id", new ProductController().updatePrice);
+ProductRouter.put("/updatePrice/:id", authMiddleware, new ProductController().updatePrice);
 
 export default ProductRouter  ;

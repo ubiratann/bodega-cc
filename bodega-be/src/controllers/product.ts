@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { Equal, FindManyOptions, LessThan, Like, MoreThan } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { apimethod } from "../decorators/apimethod";
+import { Category } from "../models/category";
 import { Product } from "../models/product";
 import { StockItem } from "../models/stockItem";
 import { ApiError } from "../util/apiError";
@@ -10,7 +11,7 @@ import { ApiError } from "../util/apiError";
 
 const AVAILABLE = 1
 const RESERVED = 2
-const PRODUCTS_PER_PAGE = 2
+const PRODUCTS_PER_PAGE = 10
 
 class ProductController {
 
@@ -40,9 +41,8 @@ class ProductController {
     
     @apimethod
     async  getByCategory(request: Request, response:Response){
-        let { categoryId, page } = request.params;
+        let { id , page } = request.params;
         const repository = AppDataSource.getRepository(Product);
-
         const findOptions: FindManyOptions = {
             skip: PRODUCTS_PER_PAGE * +page,
             take: PRODUCTS_PER_PAGE,
@@ -55,7 +55,7 @@ class ProductController {
                     status: Equal(1)
                 },
                 category:{
-                    id: Equal(+categoryId),
+                    id: Equal(+id)
                 }
             }
         }
@@ -80,7 +80,7 @@ class ProductController {
                 stockItems : {
                     status: Equal(1)
                 },
-                price: LessThan(+value),
+                price: MoreThan(+value),
             }
         }
         
@@ -104,7 +104,7 @@ class ProductController {
                 stockItems : {
                     status: Equal(1)
                 },
-                quantity: MoreThan(0)
+                price: LessThan(+value),
             }
         }
 
@@ -162,10 +162,15 @@ class ProductController {
         if(entity.description == null || entity.name.trim() == "")
             throw new ApiError(StatusCodes.NOT_ACCEPTABLE, "Não é possível inserir produto com nome vazio!")
 
+        if(entity.category == null)
+            entity.category = new Category();
+            entity.category.id = entity.categoryId;
+
         let res = await repository.save(
             repository.create(entity)
         );
         
+
         if(res.id){
             res.stockItemIds = []
     

@@ -1,34 +1,20 @@
-import { StatusCodes } from "http-status-codes";
 import { Request, Response } from "express";
-import { GenericController } from "./generic";
-import { Sale } from "../models/sale";
 import { AppDataSource } from "../data-source";
-import { handler } from "../util/defaultErrorHandler";
+import { apimethod } from "../decorators/apimethod";
+import { Sale } from "../models/sale";
 
 
-class SaleController extends GenericController<Sale>{
+export default class SaleController {
     
-    constructor(){
-        super()
-        this.repository = AppDataSource.getRepository(Sale);
+    @apimethod
+    async save(request: Request, response: Response){
+        const repository = AppDataSource.getRepository(Sale);
+        let entity: Sale = {...request.body};
+
+        let res = await repository.save(
+            repository.create(entity)
+        );
     }
 
-
-    async validateSale(entity: Sale){
-
-    }
-
-    // async save(request: Request, response: Response){
-    //     try{
-
-    //         let entity: Sale = {...request.body};
-    //         await this.validateSale(entity);
-
-    //         await this.save();
-    //     }catch(error){
-    //         handler(error, response);
-    //     }
-
-    // }
 }
 

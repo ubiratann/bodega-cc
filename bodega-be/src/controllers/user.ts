@@ -38,6 +38,7 @@ class UserController{
 
         let res = await repository.save(
             repository.create({...entity}));
+        delete res.password;
         response.status(StatusCodes.CREATED).send(res);
     }
 }

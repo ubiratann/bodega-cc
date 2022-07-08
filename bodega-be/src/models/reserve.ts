@@ -1,4 +1,4 @@
-import { CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, RelationId } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, RelationId } from "typeorm";
 import { ReserveItem } from "./reserveItem";
 import { User } from "./user";
 
@@ -7,6 +7,9 @@ export class Reserve{
 
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column({default: 1})
+    status: number;
 
     @ManyToOne(() => User)
     user: User;

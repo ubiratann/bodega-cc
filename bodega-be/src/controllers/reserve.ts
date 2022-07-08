@@ -88,8 +88,6 @@ class ReserveController {
         let { userId } = request.params;
         const repository = AppDataSource.getRepository(ReserveItem);
 
-        console.log("Here!");
-
         const findOptions: FindManyOptions = {
             relations: {
                 reserve: true,
