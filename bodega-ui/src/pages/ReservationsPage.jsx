@@ -1,5 +1,5 @@
 import React from 'react';
-import './AdministrationPage.css';
+import './ReservationsPage.css';
 import Sidebar from '../components/Sidebar';
 import MainContent from '../components/MainContent';
 import ReserveService from '../services/ReserveService';
@@ -55,9 +55,9 @@ class ReservationsPage extends React.Component {
           <h1>Reservations</h1>
             {
               Object.values(this.groupBy(this.state.reserveItems, 'reserveId')).map((i) => (
-                <div>
+                <div className="reservation">
                   <h4>Reserva nº {i[0].reserveId}</h4>
-                  <table border="1">
+                  <table className="ttable">
                     <tr>
                       <th>Nome</th>
                       <th>Descrição</th>
@@ -71,7 +71,7 @@ class ReservationsPage extends React.Component {
                       </tr>
                     ))}
                     <tr>
-                      <td colspan="2">Total</td>
+                      <td colSpan="2">Total</td>
                       <td>{this.totalValue(i)}</td>
                     </tr>
                   </table>

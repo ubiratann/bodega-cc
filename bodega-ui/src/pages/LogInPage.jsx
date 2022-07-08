@@ -14,11 +14,6 @@ class LogInPage extends React.Component {
     }
   }
 
-  // renderErrorMessage = (name) =>
-  //   name === errorMessages.name && (
-  //     <div className="error">{errorMessages.message}</div>
-  //   );
-
   handleSubmit = (event) => {
     event.preventDefault();
     AuthService.doLogin(this.state.email, this.state.password).then(() => {

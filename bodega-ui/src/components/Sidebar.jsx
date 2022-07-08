@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar">
         <div className="title">
-          <h5>Seja bem-vindo(a), Dambola</h5>
+          <h5>Seja bem-vindo(a), {AuthService.getInstance().user}</h5>
         </div>
         <ul>
           {
